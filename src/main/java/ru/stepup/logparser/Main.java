@@ -10,7 +10,7 @@ import java.io.FileReader;
 public class Main {
 
     public static void main(String[] args) {
-        String path = "C:\\Users\\AAKHramova\\Khramova\\AT\\access-log-parser-mvn\\src\\main\\resources\\access.log";
+        String path = "src/main/resources/access.log";
         System.out.println("Считывается файл по пути:\n" + path);
         try {
             FileReader fileReader = new FileReader(path);

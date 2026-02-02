@@ -16,12 +16,12 @@ public class LogEntry {
             "^(\\S+) \\S+ \\S+ \\[(.+?)] \"(\\S+) (\\S+) \\S+\" (\\d{3}) (\\d+) \"([^\"]*)\" \"([^\"]*)\"$"
     );
 
-    private final String ip;
-    private final LocalDateTime datetime;
+    private final String ipAddr;
+    private final LocalDateTime time;
     private final HttpMethod method;
     private final String path;
-    private final String responseCode;
-    private final int dataSize;
+    private final int responseCode;
+    private final int responseSize;
     private final String referer;
     private final UserAgent userAgent;
 
@@ -31,12 +31,12 @@ public class LogEntry {
             throw new IllegalArgumentException("Invalid log line: " + log);
         }
 
-        ip = m.group(1);
-        datetime = LocalDateTime.parse(m.group(2), DateTimeFormatter.ofPattern("dd/MMM/yyyy:HH:mm:ss Z", Locale.ENGLISH));
+        ipAddr = m.group(1);
+        time = LocalDateTime.parse(m.group(2), DateTimeFormatter.ofPattern("dd/MMM/yyyy:HH:mm:ss Z", Locale.ENGLISH));
         method = HttpMethod.valueOf(m.group(3));
         path = m.group(4);
-        responseCode = m.group(5);
-        dataSize = Integer.parseInt(m.group(6));
+        responseCode = Integer.parseInt(m.group(5));
+        responseSize = Integer.parseInt(m.group(6));
         referer = m.group(7);
         userAgent = new UserAgent(m.group(8));
     }
@@ -89,12 +89,12 @@ public class LogEntry {
     @Override
     public String toString() {
         return "LogEntry{" +
-                "ip='" + ip + '\'' +
-                ", datetime=" + datetime +
+                "ip='" + ipAddr + '\'' +
+                ", datetime=" + time +
                 ", method=" + method +
                 ", path='" + path + '\'' +
                 ", responseCode='" + responseCode + '\'' +
-                ", dataSize=" + dataSize +
+                ", dataSize=" + responseSize +
                 ", referer='" + referer + '\'' +
                 ", userAgent=" + userAgent +
                 '}';

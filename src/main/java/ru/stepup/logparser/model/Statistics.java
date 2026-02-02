@@ -16,9 +16,9 @@ public class Statistics {
     }
 
     public void addEntry(LogEntry entry) {
-        totalTraffic += entry.getDataSize();
-        if (entry.getDatetime().isBefore(minTime)) minTime = entry.getDatetime();
-        if (entry.getDatetime().isAfter(maxTime)) maxTime = entry.getDatetime();
+        totalTraffic += entry.getResponseSize();
+        if (entry.getTime().isBefore(minTime)) minTime = entry.getTime();
+        if (entry.getTime().isAfter(maxTime)) maxTime = entry.getTime();
     }
 
     public int getTrafficRate() {
