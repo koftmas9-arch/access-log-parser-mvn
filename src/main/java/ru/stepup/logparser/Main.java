@@ -29,9 +29,12 @@ public class Main {
             }
             System.out.println("Общее количество строк в файле: " + lineCount);
             System.out.printf("Средний объём трафика сайта за час: %d байт%n", statistics.getTrafficRate());
-            System.out.println("Адресов страниц в файле: " + statistics.getPages().size());
+            System.out.println("Существующих адресов страниц в файле: " + statistics.getExistingPages().size());
+            System.out.println("Несуществующих адресов страниц в файле: " + statistics.getNonExistingPages().size());
             System.out.println("Доли операционных систем: " + statistics.getOsStatistics());
-            System.out.println("Сумма всех долей: " + statistics.getOsStatistics().values().stream().mapToDouble(Double::doubleValue).sum());
+            System.out.println("Сумма всех долей операционных систем: " + statistics.getOsStatistics().values().stream().mapToDouble(Double::doubleValue).sum());
+            System.out.println("Доли браузеров: " + statistics.getBrowserStatistics());
+            System.out.println("Сумма всех долей браузеров: " + statistics.getBrowserStatistics().values().stream().mapToDouble(Double::doubleValue).sum());
         } catch (Exception e) {
             e.printStackTrace();
         }

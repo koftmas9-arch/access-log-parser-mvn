@@ -12,9 +12,7 @@ import java.util.regex.Pattern;
 @Getter
 public class LogEntry {
 
-    private static final Pattern LOG_PATTERN = Pattern.compile(
-            "^(\\S+) \\S+ \\S+ \\[(.+?)] \"(\\S+) (\\S+) \\S+\" (\\d{3}) (\\d+) \"([^\"]*)\" \"([^\"]*)\"$"
-    );
+    private static final Pattern LOG_PATTERN = Pattern.compile("^(\\S+) \\S+ \\S+ \\[(.+?)] \"(\\S+) (\\S+) \\S+\" (\\d{3}) (\\d+) \"([^\"]*)\" \"([^\"]*)\"$");
 
     private final String ipAddr;
     private final LocalDateTime time;
@@ -79,24 +77,12 @@ public class LogEntry {
 
         @Override
         public String toString() {
-            return "UserAgent{" +
-                    "OS='" + OS + '\'' +
-                    ", browser='" + browser + '\'' +
-                    '}';
+            return "UserAgent{" + "OS='" + OS + '\'' + ", browser='" + browser + '\'' + '}';
         }
     }
 
     @Override
     public String toString() {
-        return "LogEntry{" +
-                "ip='" + ipAddr + '\'' +
-                ", datetime=" + time +
-                ", method=" + method +
-                ", path='" + path + '\'' +
-                ", responseCode='" + responseCode + '\'' +
-                ", dataSize=" + responseSize +
-                ", referer='" + referer + '\'' +
-                ", userAgent=" + userAgent +
-                '}';
+        return "LogEntry{" + "ip='" + ipAddr + '\'' + ", datetime=" + time + ", method=" + method + ", path='" + path + '\'' + ", responseCode='" + responseCode + '\'' + ", dataSize=" + responseSize + ", referer='" + referer + '\'' + ", userAgent=" + userAgent + '}';
     }
 }
