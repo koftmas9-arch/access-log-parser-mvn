@@ -39,15 +39,22 @@ public class LogEntry {
         userAgent = new UserAgent(m.group(8));
     }
 
-    @Getter
     public static class UserAgent {
 
+        @Getter
         private final String OS;
+        @Getter
         private final String browser;
+        private final boolean browserIsBot;
 
         public UserAgent(String userAgent) {
             OS = parseOS(userAgent);
             browser = parseBrowser(userAgent);
+            browserIsBot = userAgent.toLowerCase().contains("bot");
+        }
+
+        public boolean isBot() {
+            return browserIsBot;
         }
 
         private String parseOS(String ua) {

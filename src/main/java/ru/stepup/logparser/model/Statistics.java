@@ -12,6 +12,8 @@ import java.util.Set;
 public class Statistics {
 
     int totalTraffic;
+    int browserVisitsCount;
+    Set<String> uniqueIps;
     LocalDateTime minTime;
     LocalDateTime maxTime;
     @Getter
@@ -20,15 +22,19 @@ public class Statistics {
     Set<String> nonExistingPages;
     Map<String, Integer> osStatistics;
     Map<String, Integer> browserStatistics;
+    int errorRequestCount;
 
     public Statistics() {
         totalTraffic = 0;
+        browserVisitsCount = 0;
         minTime = LocalDateTime.MAX;
         maxTime = LocalDateTime.MIN;
         existingPages = new HashSet<>();
         nonExistingPages = new HashSet<>();
         osStatistics = new HashMap<>();
         browserStatistics = new HashMap<>();
+        errorRequestCount = 0;
+        uniqueIps = new HashSet<>();
     }
 
     public void addEntry(LogEntry entry) {
@@ -39,10 +45,27 @@ public class Statistics {
         if (entry.getResponseCode() == 404) nonExistingPages.add(entry.getPath());
         osStatistics.put(entry.getUserAgent().getOS(), osStatistics.getOrDefault(entry.getUserAgent().getOS(), 0) + 1);
         browserStatistics.put(entry.getUserAgent().getBrowser(), browserStatistics.getOrDefault(entry.getUserAgent().getBrowser(), 0) + 1);
+        if (!entry.getUserAgent().isBot()) {
+            browserVisitsCount++;
+            uniqueIps.add(entry.getIpAddr());
+        }
+        if (entry.getResponseCode() != 200) errorRequestCount++;
     }
 
-    public int getTrafficRate() {
+    public int getTrafficPerHour() {
         return (int) (totalTraffic / Duration.between(minTime, maxTime).toHours());
+    }
+
+    public int getBrowserVisitsPerHour() {
+        return (int) (browserVisitsCount / Duration.between(minTime, maxTime).toHours());
+    }
+
+    public int getErrorRequestPerHour() {
+        return (int) (errorRequestCount / Duration.between(minTime, maxTime).toHours());
+    }
+
+    public int getVisitsPerUser() {
+        return browserVisitsCount / uniqueIps.size();
     }
 
     public Map<String, Double> getOsStatistics() {
