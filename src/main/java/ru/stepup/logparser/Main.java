@@ -28,9 +28,10 @@ public class Main {
                 statistics.addEntry(logEntry);
             }
             System.out.println("Общее количество строк в файле: " + lineCount);
+            System.out.printf("Средний объём трафика сайта за час: %d байт%n", statistics.getTrafficRate());
             System.out.println("Адресов страниц в файле: " + statistics.getPages().size());
             System.out.println("Доли операционных систем: " + statistics.getOsStatistics());
-            System.out.printf("Средний объём трафика сайта за час: %d байт%n", statistics.getTrafficRate());
+            System.out.println("Сумма всех долей: " + statistics.getOsStatistics().values().stream().mapToDouble(Double::doubleValue).sum());
         } catch (Exception e) {
             e.printStackTrace();
         }
