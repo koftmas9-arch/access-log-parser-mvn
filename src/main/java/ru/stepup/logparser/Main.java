@@ -28,6 +28,8 @@ public class Main {
                 statistics.addEntry(logEntry);
             }
             System.out.println("Общее количество строк в файле: " + lineCount);
+            System.out.println("Адресов страниц в файле: " + statistics.getPages().size());
+            System.out.println("Доли операционных систем: " + statistics.getOsStatistics());
             System.out.printf("Средний объём трафика сайта за час: %d байт%n", statistics.getTrafficRate());
         } catch (Exception e) {
             e.printStackTrace();
