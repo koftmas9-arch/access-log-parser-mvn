@@ -32,14 +32,24 @@ public class Main {
             System.out.println("Существующих адресов страниц в файле: " + statistics.getExistingPages().size());
             System.out.println("Несуществующих адресов страниц в файле: " + statistics.getNonExistingPages().size());
             System.out.println("Доли операционных систем: " + statistics.getOsStatistics());
-            System.out.println("Сумма всех долей операционных систем: " + statistics.getOsStatistics().values().stream().mapToDouble(Double::doubleValue).sum());
+            System.out.println("Сумма всех долей операционных систем: " + statistics.getOsStatistics().values()
+                    .stream()
+                    .mapToDouble(Double::doubleValue)
+                    .sum());
             System.out.println("Доли браузеров: " + statistics.getBrowserStatistics());
-            System.out.println("Сумма всех долей браузеров: " + statistics.getBrowserStatistics().values().stream().mapToDouble(Double::doubleValue).sum());
+            System.out.println("Сумма всех долей браузеров: " + statistics.getBrowserStatistics().values()
+                    .stream()
+                    .mapToDouble(Double::doubleValue)
+                    .sum());
             System.out.println("Среднее количество посещений сайта за час: " + statistics.getBrowserVisitsPerHour());
             System.out.println("Среднее количество ошибочных запросов за час: " + statistics.getErrorRequestPerHour());
             System.out.println("Средняя посещаемость одним пользователем: " + statistics.getVisitsPerUser());
+            System.out.println("Максимальная посещаемость одним пользователем: " + statistics.getMaxVisitsPerUser());
+            System.out.println("Пиковой посещаемость сайта в секунду 5: " + statistics.getVisitsPerSecond(5));
+            System.out.println("Пиковой посещаемость сайта в секунду 17: " + statistics.getVisitsPerSecond(17));
+            System.out.println("Домены:\n" + String.join("\n", statistics.getDomains()));
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }
